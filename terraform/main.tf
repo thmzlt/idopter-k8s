@@ -66,7 +66,7 @@ resource "google_container_node_pool" "main" {
     oauth_scopes = []
 
     preemptible  = false
-    machine_type = "e2-standard-2"
+    machine_type = "e2-medium"
     tags         = []
 
     metadata = {
