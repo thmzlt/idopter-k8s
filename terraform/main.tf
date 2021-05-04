@@ -13,8 +13,8 @@ terraform {
 }
 
 provider "google" {
-  project = var.project_id
-  region  = var.region
+  project     = var.project_id
+  region      = var.region
   credentials = var.credentials
 }
 
@@ -44,6 +44,7 @@ resource "google_container_cluster" "main" {
 
   remove_default_node_pool = true
   initial_node_count       = 1
+  logging_service          = "none"
 
   master_auth {
     username = ""
