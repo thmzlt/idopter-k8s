@@ -24,3 +24,6 @@ spec:
     substitute:
       appName: liker-main
       appSubdomain: liker
+      appReplicas: "3"
+      color: cornsilk
+      prompt: Do you like Kubernetes?

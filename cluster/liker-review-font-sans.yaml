@@ -24,3 +24,6 @@ spec:
     substitute:
       appName: liker-review-font-sans
       appSubdomain: liker-review-font-sans
+      appReplicas: "1"
+      color: aliceblue
+      prompt: Do you like Kubernetes on review?
