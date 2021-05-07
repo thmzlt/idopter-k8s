@@ -34,7 +34,7 @@ resource "google_compute_subnetwork" "main" {
   name          = "main"
   region        = var.region
   network       = google_compute_network.main.name
-  ip_cidr_range = "10.10.0.0/24"
+  ip_cidr_range = "10.0.0.0/24"
 }
 
 resource "google_container_cluster" "main" {
@@ -46,6 +46,15 @@ resource "google_container_cluster" "main" {
   initial_node_count       = 1
   logging_service          = "none"
 
+  networking_mode = "VPC_NATIVE"
+  network         = google_compute_network.main.name
+  subnetwork      = google_compute_subnetwork.main.name
+
+  ip_allocation_policy {
+    cluster_ipv4_cidr_block  = "10.200.0.0/16"
+    services_ipv4_cidr_block = "10.100.0.0/16"
+  }
+
   master_auth {
     username = ""
     password = ""
@@ -54,6 +63,8 @@ resource "google_container_cluster" "main" {
       issue_client_certificate = false
     }
   }
+
+  depends_on = [google_compute_subnetwork.main]
 }
 
 resource "google_container_node_pool" "main" {
